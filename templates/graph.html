@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block head %} {% endblock %} {% block content %}
+<form
+  action="{{ url_for('view_graph') }}"
+  method="GET"
+  style="margin-left: 10px;"
+>
+  <strong>Сортировка по дате:</strong>
+  <input
+    type="text"
+    name="from_datetime"
+    placeholder="YYYY-MM-DD HH:MM:SS"
+    required
+  />
+  -
+  <input
+    type="text"
+    name="to_datetime"
+    placeholder="YYYY-MM-DD HH:MM:SS"
+    required
+  />
+  <input type="submit" value="Отсортировать" />
+</form>
+<svg id="d3-graph"></svg>
+<div id="dataDiv" data-graphdata='{{ dataset | tojson | safe }}'></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.1/d3.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/graph.js') }}"></script>
+{% endblock %}
